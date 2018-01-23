@@ -3,7 +3,8 @@
 # authors: Shoppilot team
 
 after_initialize do
-  Discourse::Application.routes.append do
-    get "rules" => "static#show", id: "tos", as: 'rules', constraints: { format: /(json|html)/ }
+  Discourse::Application.routes.prepend do
+    get 'rules' => 'static#show', id: 'tos', constraints: { format: /(json|html)/ }
+    get 'tos' => redirect('/rules'), as: 'tos_override'
   end
 end
